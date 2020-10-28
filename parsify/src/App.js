@@ -8,7 +8,7 @@ function App() {
       <header><h1>Parsify</h1></header>
       <div className="App-view">
         <form noValidate autoComplete="off">
-          <TextField id="standard-basic" label="Enter Song" style={{width: '50vw'}}/>
+          <TextField color="secondary" id="standard-basic" label="Enter Song" underlineStyle={{borderColor: '#D94A4A'}} style={{width: '50vw'}}/>
           <Button>Search</Button>
         </form>
       </div>
