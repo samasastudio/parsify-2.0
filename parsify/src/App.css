@@ -1,17 +1,23 @@
 .App {
   text-align: left;
-  background-color: #010101;
-  color: white;
+  background-color:rgba(217, 119, 191, 0);
+  color: #010101;
+}
+
+h1 {
+  text-shadow: 2px 2px 8px rgba(1,1,1,0.5);
+  font-family: monospace;
+  font-size: 50px;
 }
 
 .App-view {
-  min-height: 93vh;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  background: #010101;
 }
 
 .App-link {
@@ -20,5 +26,7 @@
 
 header {
   align-items: left;
-  margin-left: 50px;
+  padding-left: 50px;
+  padding-bottom: 25px;
+  background: rgba(217, 119, 191, 0);
 }
