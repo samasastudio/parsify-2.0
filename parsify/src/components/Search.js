@@ -4,11 +4,11 @@ import {
   Button,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 
-const Search = () => {
+const Search = ({ items }) => {
   return (
     <div>
       <form noValidate autoComplete="off">
@@ -30,27 +30,13 @@ const Search = () => {
         </Button>
       </form>
       <List style={{ width: "60vw", float: "left" }}>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"NBD" by Teen Daze</ListItemText>
-        </ListItem>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"Oakmoss" by Bibio</ListItemText>
-        </ListItem>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"Blue Comanche" by Westerman</ListItemText>
-        </ListItem>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"Wistful (Fata Morgana) by Baths</ListItemText>
-        </ListItem>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"Runner" by Tennis</ListItemText>
-        </ListItem>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"You Lost Me There" by George Clinton</ListItemText>
-        </ListItem>
-        <ListItem style={{ width: "60vw" }} button>
-          <ListItemText>"What Did He Say" by Nite Jewel</ListItemText>
-        </ListItem>
+        {items.map((item) => {
+          return (
+            <ListItem style={{ width: "60vw" }} button>
+              <ListItemText>"What Did He Say" by Nite Jewel</ListItemText>
+            </ListItem>
+          );
+        })}
       </List>
     </div>
   );
