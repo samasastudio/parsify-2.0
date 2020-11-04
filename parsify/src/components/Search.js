@@ -33,7 +33,7 @@ const Search = ({ items }) => {
         {items.map((item) => {
           return (
             <ListItem style={{ width: "60vw" }} button>
-              <ListItemText>"What Did He Say" by Nite Jewel</ListItemText>
+              <ListItemText>{item}</ListItemText>
             </ListItem>
           );
         })}
