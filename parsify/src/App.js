@@ -6,6 +6,17 @@ import Search from "./components/Search";
 import { Pagination } from "@material-ui/lab";
 
 function App() {
+  const animateBackground = () => {
+    let angle = 0;
+
+    const changeBackground = () => {
+      angle++;
+      document.body.style.background = `linear-gradient(${angle}deg, rgba(217, 119, 191, 1) 0%, rgba(217, 163, 98, 1) 33%, rgba(217, 141, 98, 1) 60%, rgba(217, 96, 85, 1) 100%, rgba(217, 74, 74, 1) 100%)`;
+      requestAnimationFrame(changeBackground);
+    };
+
+    changeBackground();
+  };
 
   const [searchState, setSearch] = useState({
     searchItems: [
@@ -21,7 +32,8 @@ function App() {
 
   useEffect(() => {
     console.log("we're going to win");
-  })
+    animateBackground();
+  });
 
   return (
     <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
@@ -30,7 +42,7 @@ function App() {
       </header>
       <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
         <div className="App-view">
-          <Search items={searchState.searchItems}/>
+          <Search items={searchState.searchItems} />
           <Pagination page={2} count={12} size="small" />
         </div>
       </Paper>
