@@ -19,8 +19,6 @@ function App() {
         <h1>øøø</h1>
       </header>
       <Paper elevation={24}>
-        <Grid container>
-          <Grid item xs={12} style={{padding: '50px', background: '#010101'}}>
         <div className="App-view">
           <form noValidate autoComplete="off">
             <TextField
@@ -65,8 +63,6 @@ function App() {
           </List>
           <Pagination page={2} count={12}/>
         </div>
-        </Grid>
-        </Grid>
       </Paper>
     </div>
   );
