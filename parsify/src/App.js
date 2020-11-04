@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { Paper } from "@material-ui/core";
 import Search from "./components/Search";
@@ -7,7 +7,7 @@ import { Pagination } from "@material-ui/lab";
 
 function App() {
 
-  const [state, setState] = useState({
+  const [searchState, setSearch] = useState({
     searchItems: [
       '"NBD" by Teen Daze',
       '"Oakmoss" by Bibio',
@@ -19,6 +19,10 @@ function App() {
     ],
   });
 
+  useEffect(() => {
+    console.log("we're going to win");
+  })
+
   return (
     <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
       <header>
@@ -26,7 +30,7 @@ function App() {
       </header>
       <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
         <div className="App-view">
-          <Search items={state.searchItems}/>
+          <Search items={searchState.searchItems}/>
           <Pagination page={2} count={12} size="small" />
         </div>
       </Paper>
