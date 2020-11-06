@@ -34,8 +34,8 @@ function App() {
   useEffect(() => {
     console.log("we're going to win");
     animateBackground();
-    axios.get("/ping").then((res) => {
-      console.log(res.data);
+    axios.get("/load").then((res) => {
+      console.log('success loading')
     });
   });
 

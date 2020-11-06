@@ -1,12 +1,16 @@
+const {db, getStartUp} = require('./db/index');
 const express = require('express');
 const path = require('path');
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/ping', function (req, res) {
-  console.log('trying to pong')
- return res.send('pong');
+app.get('/load', function (req, res) {
+  getStartUp()
+    .then(load => {
+      console.log(load);
+      res.end();
+    })
 });
 
 app.get('/', function (req, res) {
