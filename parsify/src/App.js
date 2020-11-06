@@ -20,15 +20,7 @@ function App() {
   };
 
   const [searchState, setSearch] = useState({
-    searchItems: [
-      '"NBD" by Teen Daze',
-      '"Oakmoss" by Bibio',
-      '"Blue Comanche" by Westerman',
-      '"Wistful (Fata Morgana) by Baths',
-      '"Runner" by Tennis',
-      '"You Lost Me There" by George Clinton',
-      '"What Did He Say" by Nite Jewel',
-    ],
+    searchItems: [],
   });
 
   useEffect(() => {
@@ -36,6 +28,7 @@ function App() {
     animateBackground();
     axios.get("/load").then((res) => {
       console.log('success loading', res.data)
+      setSearch({searchItems: res.data})
     });
   });
 

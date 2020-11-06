@@ -33,7 +33,7 @@ const Search = ({ items }) => {
         {items.map((item) => {
           return (
             <ListItem style={{ width: "60vw" }} button>
-              <ListItemText>{item}</ListItemText>
+              <ListItemText>{`${item.track} by ${item.artists}`}</ListItemText>
             </ListItem>
           );
         })}
