@@ -26,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "nodemon server.js",
-    "gen": "node generator.js"
+    "gen": "node generator.js",
+    "seedJSON": "mongoimport --type json -d parsify -c features --drop --jsonArray seed.json"
   },
   "eslintConfig": {
     "extends": [
