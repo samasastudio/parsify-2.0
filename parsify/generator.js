@@ -1,8 +1,9 @@
 const { CollectionsOutlined } = require("@material-ui/icons");
 const { getAuth, getPlaylist, getAnalysis } = require("./spotify");
+const fs = require("fs");
 
-let plJSON
-let anJSON
+let plJSON;
+let anJSON;
 
 getAuth()
   .then((auth) => {
@@ -15,11 +16,18 @@ getAuth()
   })
   .then((analysis) => {
     // console.log(analysis);
-    anJSON = analysis;
-    // console.log(anJSON)
+    anJSON = analysis.features.map((el, i) => {
+      el.track = plJSON[i].track;
+      el.album = plJSON[i].album;
+      el.artists = plJSON[i].artists;
+      return el;
+    });
+    fs.writeFileSync("seed.json", JSON.stringify(anJSON));
+  })
+  .catch((err) => {
+    console.error(err);
   });
 
+// const finalJSON = plJSON.map((el, i) => {
 
-  // const finalJSON = plJSON.map((el, i) => {
-
-  // })
+// })
