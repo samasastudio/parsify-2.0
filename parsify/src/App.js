@@ -35,7 +35,7 @@ function App() {
     console.log("we're going to win");
     animateBackground();
     axios.get("/load").then((res) => {
-      console.log('success loading')
+      console.log('success loading', res.data)
     });
   });
 
