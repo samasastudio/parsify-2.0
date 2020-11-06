@@ -3,38 +3,35 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  createMuiTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { dark } from "@material-ui/core/styles/createPalette";
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: "dark",
     text: {
-      primary: '#d9a362',
-      secondary: '#d9a362'
+      primary: "#d9a362",
+      secondary: "#d9a362",
     },
     action: {
-      active: '#d9a362',
+      active: "#d9a362",
     },
-    divider: '#d9a362',
+    divider: "#d9a362",
     primary: {
-      main: '#d9a362',
-      light: '#d9a362'
+      main: "#d9a362",
+      light: "#d9a362",
     },
     secondary: {
-      main: '#d9a362',
-      light: '#d9a362'
-    }
+      main: "#d9a362",
+      light: "#d9a362",
+    },
   },
 });
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>,
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

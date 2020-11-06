@@ -15,11 +15,13 @@ const getPlaylist = (auth, uuid) => {
   .then((playlistData) => {
     // console.log('playlist data from axios: ', playlistData.data.tracks.items);
     let name = playlistData.data.name;
-    let pldata = playlistData.data.tracks.items.map(x => {
-      return {tk: x.track.name, id: x.track.id}
+    let plData = playlistData.data.tracks.items.map(x => {
+      console.log(x)
+      let artistList = x.track.artists.reduce((acc, el) => acc + el.name + ', ', '').slice(0, -2);
+      return {track: x.track.name, id: x.track.id, album: x.track.album.name, artists: artistList}
     })
     // console.log(pldata);
-    return {pldata, name, auth};
+    return {plData, name, auth};
   })
   .catch(err => {console.log('playlist get failed: ', err)});
 }
@@ -63,7 +65,7 @@ const getAuth = () => {
       password: TOKEN.SECRET
     }
   }).then(res => {
-      return res;
+      return res.data.access_token;
   }).catch(err => {
     console.log('getting Auth failed: ', err);
   });

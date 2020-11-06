@@ -4,7 +4,7 @@ import "./App.css";
 import { Paper } from "@material-ui/core";
 import Search from "./components/Search";
 import { Pagination } from "@material-ui/lab";
-import axios from 'axios';
+import axios from "axios";
 
 function App() {
   const animateBackground = () => {
@@ -34,10 +34,9 @@ function App() {
   useEffect(() => {
     console.log("we're going to win");
     animateBackground();
-    axios.get('/ping')
-      .then(res => {
-        console.log(res.data)
-      })
+    axios.get("/ping").then((res) => {
+      console.log(res.data);
+    });
   });
 
   return (
