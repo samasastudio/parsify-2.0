@@ -27,10 +27,14 @@ function App() {
     console.log("we're going to win");
     animateBackground();
     axios.get("/load").then((res) => {
-      console.log('success loading', res.data)
-      setSearch({searchItems: res.data})
+      console.log("success loading", res.data);
+      setSearch({ searchItems: res.data });
     });
   }, []);
+
+  const onAnalyze = (cellParams) => {
+    console.log(cellParams.rowModel);
+  };
 
   return (
     <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
@@ -39,7 +43,7 @@ function App() {
       </header>
       <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
         <div className="App-view">
-          <Search items={searchState.searchItems} />
+          <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
         </div>
       </Paper>
     </div>
