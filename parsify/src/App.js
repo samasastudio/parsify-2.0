@@ -30,7 +30,7 @@ function App() {
       console.log('success loading', res.data)
       setSearch({searchItems: res.data})
     });
-  });
+  }, []);
 
   return (
     <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
