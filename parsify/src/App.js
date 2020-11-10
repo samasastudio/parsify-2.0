@@ -5,6 +5,7 @@ import { Paper } from "@material-ui/core";
 import Search from "./components/Search";
 import { Pagination } from "@material-ui/lab";
 import axios from "axios";
+import { Doughnut } from "react-chartjs-2";
 
 function App() {
   const animateBackground = () => {
@@ -23,6 +24,11 @@ function App() {
     searchItems: [],
   });
 
+  const [chartState, setChart] = useState({
+    hidden: true,
+    chartData: [],
+  });
+
   useEffect(() => {
     console.log("we're going to win");
     animateBackground();
@@ -33,7 +39,58 @@ function App() {
   }, []);
 
   const onAnalyze = (cellParams) => {
-    console.log(cellParams.rowModel);
+    console.log(cellParams.rowModel.id);
+    axios
+      .get(`/analyze/${cellParams.rowModel.id}`)
+      .then((res) => {
+        console.log("response from analyze!", res);
+        const {
+          danceability,
+          energy,
+          instrumentalness,
+          liveness,
+          speechiness,
+          valence,
+        } = res.data[0];
+        const data = {
+          labels: [
+            "danceability",
+            "energy",
+            "instrumentalness",
+            "liveness",
+            "speechiness",
+            "valence",
+          ],
+          datasets: [
+            {
+              data: [
+                danceability,
+                energy,
+                instrumentalness,
+                liveness,
+                speechiness,
+                valence,
+              ],
+              backgroundColor: [
+                "rgba(217, 119, 191, 1)",
+                "rgba(217, 163, 98, 1)",
+                "rgba(217, 141, 98, 1)",
+                "rgba(217, 96, 85, 1)",
+                "rgba(217, 74, 74, 1)",
+                "#198DB7",
+              ],
+            },
+          ],
+        };
+        const options = {legend: {display: false}}
+        setChart({
+          hidden: false,
+          chartData: {data, options},
+        });
+      })
+      .catch((err) => {
+        console.log("analysis failed!", err);
+      });
   };
 
   return (
@@ -43,7 +100,11 @@ function App() {
       </header>
       <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
         <div className="App-view">
-          <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
+          {chartState.hidden ? (
+            <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
+          ) : (
+            <Doughnut data={chartState.chartData.data} options={chartState.chartData.options} style={{marginTop: '50px'}}/>
+          )}
         </div>
       </Paper>
     </div>

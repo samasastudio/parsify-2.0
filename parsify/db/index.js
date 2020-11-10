@@ -50,6 +50,11 @@ const getStartUp = () => {
   return Features.find({}, { _id: 0, __v: 0 }).limit(35).lean().exec();
 };
 
+const getSingle = (UUID) => {
+  return Features.find({id: UUID}, {_id: 0, __v: 0}).limit(1).lean().exec();
+}
+
 module.exports.Features = Features;
 module.exports.db = db;
 module.exports.getStartUp = getStartUp;
+module.exports.getSingle = getSingle;

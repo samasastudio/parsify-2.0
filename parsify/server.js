@@ -1,4 +1,4 @@
-const { db, getStartUp } = require("./db/index");
+const { db, getStartUp, getSingle } = require("./db/index");
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -17,5 +17,15 @@ app.get("/load", function (req, res) {
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+
+app.get("/analyze/:UUID", (req, res) => {
+  getSingle(req.params.UUID).then(doc => {
+    console.log(doc)
+    res.send(doc);
+  }).catch(err => {
+    console.log('error getting doc', err);
+    res.sendStatus(500);
+  })
+})
 
 app.listen(process.env.PORT || 8080);
