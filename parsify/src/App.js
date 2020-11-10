@@ -40,7 +40,6 @@ function App() {
       <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
         <div className="App-view">
           <Search items={searchState.searchItems} />
-          <Pagination page={2} count={12} size="small" />
         </div>
       </Paper>
     </div>
