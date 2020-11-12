@@ -40,4 +40,18 @@ header {
   justify-content: center;
   align-items: center;
   display: flex;
+  background: rgba(1, 1, 1, 0.05)
 }
+
+/* .rotate {
+  animation: rotation 60s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+} */

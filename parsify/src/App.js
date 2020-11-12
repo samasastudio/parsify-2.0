@@ -27,6 +27,7 @@ function App() {
   const [chartState, setChart] = useState({
     hidden: true,
     chartData: [],
+    title: "",
   });
 
   useEffect(() => {
@@ -64,36 +65,44 @@ function App() {
           datasets: [
             {
               data: [
-                danceability,
-                energy,
-                instrumentalness,
-                liveness,
-                speechiness,
-                valence,
+                parseInt(danceability * 100),
+                parseInt(energy * 100),
+                parseInt(instrumentalness * 100),
+                parseInt(liveness * 100),
+                parseInt(speechiness * 100),
+                parseInt(valence * 100),
               ],
-              borderColor: "rgba(1, 1, 1, 1)",
-              weight: 6,
+              borderColor: "rgba(1, 1, 1, .1)",
+              borderWidth: "10px",
               backgroundColor: [
-                "rgba(217, 119, 191, 0.9)",
-                "rgba(217, 163, 98, 0.9)",
-                "rgba(217, 141, 98, 0.9)",
-                "rgba(217, 96, 85, 0.9)",
-                "rgba(217, 74, 74, 0.9)",
-                "rgba(25, 141, 183, 0.9)",
+                "rgba(217, 119, 191, 1)",
+                "rgba(217, 163, 98, 1)",
+                "rgba(217, 141, 98, 1)",
+                "rgba(217, 96, 85, 1)",
+                "rgba(217, 74, 74, 1)",
+                "rgba(25, 141, 183, 1)",
               ],
             },
           ],
         };
-        const options = { legend: { display: false } };
-        setChart({
+        const options = {
+          legend: { display: false },
           responsive: true,
+          animation: { animateScale: true, animateRotate: true },
+        };
+        setChart({
           hidden: false,
           chartData: { data, options },
+          title: res.data[0].track,
         });
       })
       .catch((err) => {
         console.log("analysis failed!", err);
       });
+  };
+
+  const onReset = () => {
+    setChart({ hidden: true, chartData: {}, title: "" });
   };
 
   if (chartState.hidden) {
@@ -120,7 +129,32 @@ function App() {
           justifyContent: "center",
         }}
       >
-        <div className="chartWrap">
+        <div
+          style={{
+            position: "absolute",
+            left: "-5px",
+            top: "-5px",
+            padding: "50px",
+            zIndex: "99",
+          }}
+        >
+          {`Analysis: "${chartState.title}"`}
+        </div>
+        <div
+          onClick={(e) => {
+            onReset(e);
+          }}
+          style={{
+            position: "absolute",
+            right: "-5px",
+            top: "-5px",
+            padding: "50px",
+            zIndex: "99",
+          }}
+        >
+          Reset
+        </div>
+        <div className="chartWrap rotate">
           <Doughnut
             data={chartState.chartData.data}
             options={chartState.chartData.options}
