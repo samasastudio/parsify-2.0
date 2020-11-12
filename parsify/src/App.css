@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Gulax';
+  src: local('Gulax'), url(./gulax-webfont.woff) format('woff');
+}
+
 .App {
   text-align: left;
   background-color: rgba(1, 1, 1, 0);
@@ -6,8 +11,8 @@
 
 h1 {
   text-shadow: 2px 2px 8px rgba(1,1,1,0.5);
-  font-family: monospace;
-  font-size: 50px;
+  font-family: 'Gulax';
+  font-size: 64px;
 }
 
 .App-view {

@@ -109,7 +109,7 @@ function App() {
     return (
       <div className="App">
         <header>
-          <h1>øøø</h1>
+          <h1>pSy</h1>
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
           <div className="App-view">
