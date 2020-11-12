@@ -72,15 +72,15 @@ function App() {
                 parseInt(speechiness * 100),
                 parseInt(valence * 100),
               ],
-              borderColor: "rgba(1, 1, 1, .1)",
+              borderColor: "rgba(1,1,1,0)",
               borderWidth: "10px",
               backgroundColor: [
-                "rgba(217, 119, 191, 1)",
-                "rgba(217, 163, 98, 1)",
-                "rgba(217, 141, 98, 1)",
-                "rgba(217, 96, 85, 1)",
-                "rgba(217, 74, 74, 1)",
-                "rgba(25, 141, 183, 1)",
+                "rgba(217, 119, 191, 0.75)",
+                "rgba(217, 163, 98, 0.75)",
+                "rgba(217, 141, 98, 0.75)",
+                "rgba(217, 96, 85, 0.75)",
+                "rgba(217, 74, 74, 0.75)",
+                "rgba(25, 141, 183, 0.75)",
               ],
             },
           ],
@@ -107,7 +107,7 @@ function App() {
 
   if (chartState.hidden) {
     return (
-      <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
+      <div className="App">
         <header>
           <h1>øøø</h1>
         </header>
@@ -120,37 +120,15 @@ function App() {
     );
   } else {
     return (
-      <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            left: "-5px",
-            top: "-5px",
-            padding: "50px",
-            zIndex: "99",
-          }}
-        >
+      <div className="chartContainer">
+        <div className="titleContainer">
           {`Analysis: "${chartState.title}"`}
         </div>
         <div
           onClick={(e) => {
             onReset(e);
           }}
-          style={{
-            position: "absolute",
-            right: "-5px",
-            top: "-5px",
-            padding: "50px",
-            zIndex: "99",
-          }}
+          className="resetContainer"
         >
           Reset
         </div>
