@@ -71,21 +71,24 @@ function App() {
                 speechiness,
                 valence,
               ],
+              borderColor: "rgba(1, 1, 1, 0.1)",
+              weight: 6,
               backgroundColor: [
-                "rgba(217, 119, 191, 1)",
-                "rgba(217, 163, 98, 1)",
-                "rgba(217, 141, 98, 1)",
-                "rgba(217, 96, 85, 1)",
-                "rgba(217, 74, 74, 1)",
-                "#198DB7",
+                "rgba(217, 119, 191, 0.9)",
+                "rgba(217, 163, 98, 0.9)",
+                "rgba(217, 141, 98, 0.9)",
+                "rgba(217, 96, 85, 0.9)",
+                "rgba(217, 74, 74, 0.9)",
+                "rgba(25, 141, 183, 0.9)",
               ],
             },
           ],
         };
-        const options = {legend: {display: false}}
+        const options = { legend: { display: false } };
         setChart({
+          responsive: true,
           hidden: false,
-          chartData: {data, options},
+          chartData: { data, options },
         });
       })
       .catch((err) => {
@@ -93,22 +96,37 @@ function App() {
       });
   };
 
-  return (
-    <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
-      <header>
-        <h1>øøø</h1>
-      </header>
-      <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
-        <div className="App-view">
-          {chartState.hidden ? (
+  if (chartState.hidden) {
+    return (
+      <div className="App" style={{ background: "rgba(1, 1, 1, 0" }}>
+        <header>
+          <h1>øøø</h1>
+        </header>
+        <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
+          <div className="App-view">
             <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
-          ) : (
-            <Doughnut data={chartState.chartData.data} options={chartState.chartData.options} style={{marginTop: '50px'}}/>
-          )}
-        </div>
-      </Paper>
-    </div>
-  );
+          </div>
+        </Paper>
+      </div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <Doughnut
+          data={chartState.chartData.data}
+          options={chartState.chartData.options}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
