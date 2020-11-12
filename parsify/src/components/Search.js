@@ -11,13 +11,13 @@ import "./Search.css";
 
 const Search = ({ items, onAnalyze }) => {
   const columns = [
-    {field: 'track', headerName: 'Song Name', width: 500},
-    {field: 'artists', headerName: 'Artists', width: 300},
-    {field: 'album', headerName: 'Album', width: 300},
-    {field: 'id', headerName: 'UUID', width: 220, hide: true},
+    { field: "track", headerName: "Song Name", width: 500 },
+    { field: "artists", headerName: "Artists", width: 300 },
+    { field: "album", headerName: "Album", width: 300 },
+    { field: "id", headerName: "UUID", width: 220, hide: true },
   ];
   return (
-    <div>
+    <div style={{ padding: "50px", height: '100%' }}>
       <form noValidate autoComplete="off">
         <TextField
           label="Enter Song"
@@ -36,12 +36,17 @@ const Search = ({ items, onAnalyze }) => {
           Search
         </Button>
       </form>
-      <div style={{ height: 400, width: "100%", marginTop: "50px" }}>
+      <div
+        className="dataWrapper"
+        style={{ height: 400, width: "100%", marginTop: "2%" }}
+      >
         <DataGrid
           rows={items}
           columns={columns}
           pageSize={6}
-          onRowClick={(cellParams) => {onAnalyze(cellParams)}}
+          onRowClick={(cellParams) => {
+            onAnalyze(cellParams);
+          }}
         />
       </div>
     </div>
