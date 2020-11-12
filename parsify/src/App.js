@@ -71,7 +71,7 @@ function App() {
                 speechiness,
                 valence,
               ],
-              borderColor: "rgba(1, 1, 1, 0.1)",
+              borderColor: "rgba(1, 1, 1, 1)",
               weight: 6,
               backgroundColor: [
                 "rgba(217, 119, 191, 0.9)",
@@ -117,13 +117,15 @@ function App() {
           width: "100vw",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
-        <Doughnut
-          data={chartState.chartData.data}
-          options={chartState.chartData.options}
-        />
+        <div className="chartWrap">
+          <Doughnut
+            data={chartState.chartData.data}
+            options={chartState.chartData.options}
+          />
+        </div>
       </div>
     );
   }
