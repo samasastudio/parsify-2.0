@@ -112,7 +112,7 @@ function App() {
           <h1>pSy</h1>
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
-          <div className="App-view">
+          <div className="App-view pixelate">
             <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
           </div>
         </Paper>

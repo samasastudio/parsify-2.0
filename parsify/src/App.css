@@ -3,6 +3,10 @@
   src: local('Gulax'), url(./gulax-webfont.woff) format('woff');
 }
 
+.pixelate {
+  font-family: 'VT323';
+}
+
 .App {
   text-align: left;
   background-color: rgba(1, 1, 1, 0);
@@ -43,7 +47,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(1, 1, 1, 0.1);
+  background-color: rgba(1, 1, 1, 0.2);
 }
 
 .titleContainer {

@@ -5,8 +5,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { dark } from "@material-ui/core/styles/createPalette";
+import "typeface-nunito-sans";
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'VT323',
+    fontSize: 24,
+  },
   palette: {
     type: "dark",
     text: {

@@ -11,7 +11,7 @@ import "./Search.css";
 
 const Search = ({ items, onAnalyze }) => {
   const columns = [
-    { field: "track", headerName: "Song Name", width: 500 },
+    { field: "track", headerName: "Song Name", width: 300 },
     { field: "artists", headerName: "Artists", width: 300 },
     { field: "album", headerName: "Album", width: 300 },
     { field: "id", headerName: "UUID", width: 220, hide: true },
