@@ -1,9 +1,8 @@
 import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import "./App.css";
-import { Paper } from "@material-ui/core";
+import { Paper, Button } from "@material-ui/core";
 import Search from "./components/Search";
-import { Pagination } from "@material-ui/lab";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
 
@@ -44,7 +43,6 @@ function App() {
     axios
       .get(`/analyze/${cellParams.rowModel.id}`)
       .then((res) => {
-        console.log("response from analyze!", res);
         const {
           danceability,
           energy,
@@ -53,6 +51,7 @@ function App() {
           speechiness,
           valence,
         } = res.data[0];
+
         const data = {
           labels: [
             "danceability",
@@ -85,15 +84,24 @@ function App() {
             },
           ],
         };
+
         const options = {
+          tooltips: { enabled: false },
           legend: { display: false },
           responsive: true,
           animation: { animateScale: true, animateRotate: true },
         };
+
         setChart({
           hidden: false,
           chartData: { data, options },
           title: res.data[0].track,
+          danceability: parseInt(danceability * 100),
+          energy: parseInt(energy * 100),
+          instrumentalness: parseInt(instrumentalness * 100),
+          liveness: parseInt(liveness * 100),
+          speechiness: parseInt(speechiness * 100),
+          valence: parseInt(valence * 100),
         });
       })
       .catch((err) => {
@@ -112,7 +120,7 @@ function App() {
           <h1>pSy</h1>
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
-          <div className="App-view pixelate">
+          <div className="App-view">
             <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
           </div>
         </Paper>
@@ -121,16 +129,31 @@ function App() {
   } else {
     return (
       <div className="chartContainer">
-        <div className="titleContainer">
-          {`Analysis: "${chartState.title}"`}
-        </div>
+        <Paper elevation={10} className="titleContainer">
+          <p className="stats" style={{color: "#ffffff"}}>{`Analysis: "${chartState.title}"`}</p>
+          <p className="stats" style={{color: "rgba(217, 119, 191, 1)"}} >{`Danceability: ${chartState.danceability}`}</p>
+          <p className="stats" style={{color: "rgba(217, 163, 98, 1)"}}>{`Energy: ${chartState.energy}`}</p>
+          <p className="stats" style={{color: "rgba(217, 141, 98, 1)"}}>{`Instrumentalness: ${chartState.instrumentalness}`}</p>
+          <p className="stats" style={{color: "rgba(217, 96, 85, 1)"}}>{`Liveness: ${chartState.liveness}`}</p>
+          <p className="stats" style={{color: "rgba(217, 74, 74, 1)"}}>{`Speechiness: ${chartState.speechiness}`}</p>
+          <p className="stats" style={{color: "rgba(25, 141, 183, 1)"}}>{`Valence: ${chartState.valence}`}</p>
+        </Paper>
         <div
           onClick={(e) => {
             onReset(e);
           }}
           className="resetContainer"
         >
-          Reset
+          <Button
+            style={{
+              color: "rgba(217, 74, 74, 1)",
+              border: "1px #010101 solid",
+              backgroundColor: "rgba(1,1,1,.9)",
+              boxShadow: "2px 2px 8px rgba(1,1,1,.5)"
+            }}
+          >
+            Reset
+          </Button>
         </div>
         <div className="chartWrap rotate">
           <Doughnut
