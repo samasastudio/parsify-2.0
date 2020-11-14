@@ -10,7 +10,7 @@ import "typeface-nunito-sans";
 const theme = createMuiTheme({
   typography: {
     fontFamily: 'VT323',
-    fontSize: 24,
+    fontSize: 18
   },
   palette: {
     type: "dark",

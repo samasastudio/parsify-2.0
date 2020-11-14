@@ -28,7 +28,7 @@ const Search = ({ items, onAnalyze }) => {
           style={{
             marginLeft: "10px",
             marginBottom: "10px",
-            height: "56px",
+            height: "60px",
             width: "10vw",
             border: "1px #d9a362 solid",
           }}
