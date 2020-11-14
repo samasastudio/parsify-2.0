@@ -5,6 +5,7 @@ import { Paper, Button } from "@material-ui/core";
 import Search from "./components/Search";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
+import ApexCharts from "apexcharts";
 
 function App() {
   const animateBackground = () => {
@@ -52,49 +53,8 @@ function App() {
           valence,
         } = res.data[0];
 
-        const data = {
-          labels: [
-            "danceability",
-            "energy",
-            "instrumentalness",
-            "liveness",
-            "speechiness",
-            "valence",
-          ],
-          datasets: [
-            {
-              data: [
-                parseInt(danceability * 100),
-                parseInt(energy * 100),
-                parseInt(instrumentalness * 100),
-                parseInt(liveness * 100),
-                parseInt(speechiness * 100),
-                parseInt(valence * 100),
-              ],
-              borderColor: "rgba(1,1,1,0)",
-              borderWidth: "10px",
-              backgroundColor: [
-                "rgba(217, 119, 191, 0.75)",
-                "rgba(217, 163, 98, 0.75)",
-                "rgba(217, 141, 98, 0.75)",
-                "rgba(217, 96, 85, 0.75)",
-                "rgba(217, 74, 74, 0.75)",
-                "rgba(25, 141, 183, 0.75)",
-              ],
-            },
-          ],
-        };
-
-        const options = {
-          tooltips: { enabled: false },
-          legend: { display: false },
-          responsive: true,
-          animation: { animateScale: true, animateRotate: true },
-        };
-
         setChart({
           hidden: false,
-          chartData: { data, options },
           title: res.data[0].track,
           danceability: parseInt(danceability * 100),
           energy: parseInt(energy * 100),
@@ -103,6 +63,39 @@ function App() {
           speechiness: parseInt(speechiness * 100),
           valence: parseInt(valence * 100),
         });
+
+        var options = {
+          chart: {
+            width: "80%",
+            type: "radialBar",
+            forColor: "#010101"
+          },
+          colors: [
+            "rgba(217, 119, 191, 1)",
+            "rgba(217, 163, 98, 1)",
+            "rgba(217, 141, 98, 1)",
+            "rgba(217, 96, 85, 1)",
+            "rgba(217, 74, 74, 1)",
+            "rgba(25, 141, 183, 1)",
+          ],
+          series: [
+            parseInt(danceability * 100),
+            parseInt(energy * 100),
+            parseInt(instrumentalness * 100),
+            parseInt(liveness * 100),
+            parseInt(speechiness * 100),
+            parseInt(valence * 100),
+          ],
+          plotOptions: {
+            radialBar: {
+              track: {
+                show: false
+              }
+            }
+          }
+        };
+
+        new ApexCharts(document.querySelector("#apexWrap"), options).render();
       })
       .catch((err) => {
         console.log("analysis failed!", err);
@@ -130,13 +123,34 @@ function App() {
     return (
       <div className="chartContainer">
         <Paper elevation={10} className="titleContainer">
-          <p className="stats" style={{color: "#ffffff"}}>{`Analysis: "${chartState.title}"`}</p>
-          <p className="stats" style={{color: "rgba(217, 119, 191, 1)"}} >{`Danceability: ${chartState.danceability}`}</p>
-          <p className="stats" style={{color: "rgba(217, 163, 98, 1)"}}>{`Energy: ${chartState.energy}`}</p>
-          <p className="stats" style={{color: "rgba(217, 141, 98, 1)"}}>{`Instrumentalness: ${chartState.instrumentalness}`}</p>
-          <p className="stats" style={{color: "rgba(217, 96, 85, 1)"}}>{`Liveness: ${chartState.liveness}`}</p>
-          <p className="stats" style={{color: "rgba(217, 74, 74, 1)"}}>{`Speechiness: ${chartState.speechiness}`}</p>
-          <p className="stats" style={{color: "rgba(25, 141, 183, 1)"}}>{`Valence: ${chartState.valence}`}</p>
+          <p
+            className="stats"
+            style={{ color: "#ffffff" }}
+          >{`"${chartState.title}"`}</p>
+          <p
+            className="stats"
+            style={{ color: "rgba(217, 119, 191, 1)" }}
+          >{`Danceability: ${chartState.danceability}`}</p>
+          <p
+            className="stats"
+            style={{ color: "rgba(217, 163, 98, 1)" }}
+          >{`Energy: ${chartState.energy}`}</p>
+          <p
+            className="stats"
+            style={{ color: "rgba(217, 141, 98, 1)" }}
+          >{`Instrumentalness: ${chartState.instrumentalness}`}</p>
+          <p
+            className="stats"
+            style={{ color: "rgba(217, 96, 85, 1)" }}
+          >{`Liveness: ${chartState.liveness}`}</p>
+          <p
+            className="stats"
+            style={{ color: "rgba(217, 74, 74, 1)" }}
+          >{`Speechiness: ${chartState.speechiness}`}</p>
+          <p
+            className="stats"
+            style={{ color: "rgba(25, 141, 183, 1)" }}
+          >{`Valence: ${chartState.valence}`}</p>
         </Paper>
         <div
           onClick={(e) => {
@@ -149,18 +163,13 @@ function App() {
               color: "rgba(217, 74, 74, 1)",
               border: "1px #010101 solid",
               backgroundColor: "rgba(1,1,1,.9)",
-              boxShadow: "2px 2px 8px rgba(1,1,1,.5)"
+              boxShadow: "2px 2px 8px rgba(1,1,1,.5)",
             }}
           >
             Reset
           </Button>
         </div>
-        <div className="chartWrap rotate">
-          <Doughnut
-            data={chartState.chartData.data}
-            options={chartState.chartData.options}
-          />
-        </div>
+        <div className="chartWrap rotate" id="apexWrap" />
       </div>
     );
   }

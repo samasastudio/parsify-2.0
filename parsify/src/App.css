@@ -47,7 +47,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(1, 1, 1, 0.2);
+  background-color: rgba(1, 1, 1, 1);
+  overflow: hidden;
 }
 
 .titleContainer {
@@ -86,6 +87,10 @@ header {
 
 .rotate {
   animation: rotation 60s infinite linear;
+}
+
+.apexcharts-datalabels-group {
+  opacity: 0 !important;
 }
 
 @keyframes rotation {
