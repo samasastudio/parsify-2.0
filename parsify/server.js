@@ -1,6 +1,7 @@
 const { db, getStartUp, getSingle } = require("./db/index");
 const express = require("express");
 const path = require("path");
+const { getAuth, getSearch } = require("./spotify");
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "build")));
@@ -15,8 +16,19 @@ app.get("/load", function (req, res) {
 });
 
 app.get("/search/:text", (req, res) => {
-  console.log('getting text!', req.params.text);
-  res.end();
+  const { text } = req.params;
+  console.log('getting text!', text);
+  getAuth()
+    .then(auth => {
+      return getSearch(text, auth);
+    })
+    .then(results => {
+      console.log('results for search', results);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    })
 })
 
 app.get("/", function (req, res) {

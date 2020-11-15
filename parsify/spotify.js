@@ -70,6 +70,23 @@ const getAuth = () => {
   });
 }
 
+const getSearch = (text, auth) => {
+  return axios({
+    url: `https://api.spotify.com/v1/search?q=${text}&type=track&limit=50`,
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth}`
+    }
+  }).then(res => {
+    return res.data.tracks.items
+  }).catch(err => {
+    console.log('failed getting search', err);
+  })
+}
+
 module.exports.getPlaylist = getPlaylist;
 module.exports.getAnalysis = getAnalysis;
 module.exports.getAuth = getAuth;
+module.exports.getSearch = getSearch;
