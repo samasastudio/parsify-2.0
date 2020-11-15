@@ -114,7 +114,7 @@ function App() {
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
           <div className="App-view">
-            <Search items={searchState.searchItems} onAnalyze={onAnalyze} />
+            <Search items={searchState.searchItems} onAnalyze={onAnalyze} onSearch={setSearch}/>
           </div>
         </Paper>
       </div>

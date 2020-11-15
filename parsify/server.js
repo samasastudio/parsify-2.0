@@ -14,6 +14,11 @@ app.get("/load", function (req, res) {
   });
 });
 
+app.get("/search/:text", (req, res) => {
+  console.log('getting text!', req.params.text);
+  res.end();
+})
+
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });

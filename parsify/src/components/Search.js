@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   TextField,
   Button,
@@ -8,8 +8,25 @@ import {
 } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import "./Search.css";
+import axios from "axios";
 
-const Search = ({ items, onAnalyze }) => {
+
+const Search = ({ items, onAnalyze, onSearch }) => {
+  const [textState, setText] = useState({text: ""})
+  const handleChange = (e) => {
+    setText({text: e.target.value});
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { text } = textState;
+    axios.get(`/search/${text}`)
+      .then(res => {
+        console.log('RESPONSE FROM SUBMIT');
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  };
   const columns = [
     { field: "track", headerName: "Song Name", width: 300 },
     { field: "artists", headerName: "Artists", width: 300 },
@@ -17,24 +34,14 @@ const Search = ({ items, onAnalyze }) => {
     { field: "id", headerName: "UUID", width: 220, hide: true },
   ];
   return (
-    <div style={{ padding: "50px", height: '100%' }}>
-      <form noValidate autoComplete="off">
+    <div style={{ padding: "50px", height: "100%" }}>
+      <form noValidate autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
         <TextField
           label="Enter Song"
           variant="outlined"
           style={{ width: "50vw", height: "50px" }}
+          onChange={(e) => handleChange(e)}
         />
-        <Button
-          style={{
-            marginLeft: "10px",
-            marginBottom: "10px",
-            height: "60px",
-            width: "10vw",
-            border: "1px #d9a362 solid",
-          }}
-        >
-          Search
-        </Button>
       </form>
       <div
         className="dataWrapper"
