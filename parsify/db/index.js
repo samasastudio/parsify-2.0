@@ -47,7 +47,7 @@ const Features = mongoose.model("Features", featuresSchema);
 // Feature Controllers
 
 const getStartUp = () => {
-  return Features.find({}, { _id: 0, __v: 0 }).limit(35).lean().exec();
+  return Features.find({}, { _id: 0, __v: 0 }).sort({_id: -1}).limit(35).lean().exec();
 };
 
 const getSingle = (UUID) => {
