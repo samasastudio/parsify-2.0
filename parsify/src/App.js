@@ -22,6 +22,7 @@ function App() {
 
   const [searchState, setSearch] = useState({
     searchItems: [],
+    searching: false
   });
 
   const [chartState, setChart] = useState({
@@ -106,6 +107,21 @@ function App() {
     setChart({ hidden: true, chartData: {}, title: "" });
   };
 
+  const handleSubmit = (e, textState) => {
+    e.preventDefault();
+    const { text } = textState;
+    setSearch({searching: true, searchItems: []})
+    axios
+      .get(`/search/${text}`)
+      .then((res) => {
+        console.log("RESPONSE FROM SUBMIT", res.data);
+        setSearch({searchItems: res.data});
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   if (chartState.hidden) {
     return (
       <div className="App">
@@ -114,7 +130,7 @@ function App() {
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
           <div className="App-view">
-            <Search items={searchState.searchItems} onAnalyze={onAnalyze} onSearch={setSearch}/>
+            {!searchState.searching ? <Search items={searchState.searchItems} onAnalyze={onAnalyze} onSearch={setSearch} forSubmit={handleSubmit}/> : null}
           </div>
         </Paper>
       </div>

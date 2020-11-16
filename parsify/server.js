@@ -24,10 +24,15 @@ app.get("/search/:text", (req, res) => {
     })
     .then(results => {
       console.log('results for search', results);
+      const searchResults = results.map(x => {
+        const artistList = x.artists.reduce((acc, el) => acc + el.name + ', ', '').slice(0, -2);
+        return {id: x.id, track: x.name, artists: artistList, album: x.album.name }
+      })
+      res.send(searchResults);
     })
     .catch(err => {
       console.error(err);
-      res.sendStatus(500);
+      res.sendStatus(500); 
     })
 })
 
