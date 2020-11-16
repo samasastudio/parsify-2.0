@@ -34,20 +34,25 @@ function App() {
   useEffect(() => {
     console.log("we're going to win");
     animateBackground();
+    getLoadItems()
+  }, []);
+
+  const getLoadItems = () => {
     axios.get("/load").then((res) => {
       console.log("success loading", res.data);
       setSearch({ searchItems: res.data });
+      setChart({ hidden: true, chartData: {}, title: "" });
     });
-  }, []);
+  };
 
   const onAnalyze = (cellParams) => {
-    console.log('FOR ANALYZE', cellParams.rowModel);
+    console.log("FOR ANALYZE", cellParams.rowModel);
     axios
       .get(
         `/analyze/${cellParams.rowModel.id}/${cellParams.rowModel.data.track}/${cellParams.rowModel.data.artists}/${cellParams.rowModel.data.album}`
       )
       .then((res) => {
-        console.log('RESPONSE FROM ANALYZE', res.data)
+        console.log("RESPONSE FROM ANALYZE", res.data);
         const {
           danceability,
           energy,
@@ -107,7 +112,7 @@ function App() {
   };
 
   const onReset = () => {
-    setChart({ hidden: true, chartData: {}, title: "" });
+    getLoadItems();
   };
 
   const handleSubmit = (e, textState) => {
