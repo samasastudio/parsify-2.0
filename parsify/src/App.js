@@ -58,7 +58,7 @@ function App() {
           energy,
           instrumentalness,
           liveness,
-          speechiness,
+          acousticness,
           valence,
         } = res.data[0];
 
@@ -69,7 +69,7 @@ function App() {
           energy: parseInt(energy * 100),
           instrumentalness: parseInt(instrumentalness * 100),
           liveness: parseInt(liveness * 100),
-          speechiness: parseInt(speechiness * 100),
+          acousticness: parseInt(acousticness * 100),
           valence: parseInt(valence * 100),
         });
 
@@ -92,7 +92,7 @@ function App() {
             parseInt(energy * 100),
             parseInt(instrumentalness * 100),
             parseInt(liveness * 100),
-            parseInt(speechiness * 100),
+            parseInt(acousticness * 100),
             parseInt(valence * 100),
           ],
           plotOptions: {
@@ -134,7 +134,7 @@ function App() {
     return (
       <div className="App">
         <header>
-          <h1>pSy</h1>
+          <h1>parsify</h1>
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
           <div className="App-view">
@@ -177,7 +177,7 @@ function App() {
           <p
             className="stats"
             style={{ color: "rgba(217, 74, 74, 1)" }}
-          >{`Speechiness: ${chartState.speechiness}`}</p>
+          >{`Acousticness: ${chartState.acousticness}`}</p>
           <p
             className="stats"
             style={{ color: "rgba(25, 141, 183, 1)" }}
