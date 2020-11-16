@@ -1,10 +1,19 @@
-const { db, getStartUp, getSingle } = require("./db/index");
+const { db, getStartUp, getSingle, saveAnalysis } = require("./db/index");
 const express = require("express");
 const path = require("path");
-const { getAuth, getSearch } = require("./spotify");
+const { getAuth, getSearch, getAnalysis } = require("./spotify");
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "build")));
+
+const checkMongoUUID = (req, res, next) => {
+  getSingle(req.params.UUID).then(doc => {
+    doc.length > 0 ? res.send(doc) : next()
+  }).catch(err => {
+    console.log('error getting doc', err);
+    res.sendStatus(500);
+  })
+}
 
 app.get("/load", function (req, res) {
   getStartUp().then((load) => {
@@ -40,14 +49,27 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.get("/analyze/:UUID", (req, res) => {
-  getSingle(req.params.UUID).then(doc => {
-    console.log(doc)
-    res.send(doc);
-  }).catch(err => {
-    console.log('error getting doc', err);
-    res.sendStatus(500);
-  })
+app.get("/analyze/:UUID/:track/:artists/:album", checkMongoUUID, (req, res) => {
+  console.log('ANALYZE', req.params)
+  const {UUID, track, artists, album } = req.params;
+  getAuth()
+    .then(auth => {
+      return getAnalysis('single search', auth, [{id: UUID}]);
+    })
+    .then(results => {
+      console.log('results for analysis API', results);
+      const {features} = results;
+      features[0].track = track;
+      features[0].artists = artists;
+      features[0].album = album;
+
+      saveAnalysis(features[0]);
+      res.send(features);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500); 
+    })
 })
 
 app.listen(process.env.PORT || 8080);

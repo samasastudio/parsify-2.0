@@ -54,7 +54,12 @@ const getSingle = (UUID) => {
   return Features.find({id: UUID}, {_id: 0, __v: 0}).limit(1).lean().exec();
 }
 
+const saveAnalysis = (doc) => {
+  return Features.create(doc);
+}
+
 module.exports.Features = Features;
 module.exports.db = db;
 module.exports.getStartUp = getStartUp;
 module.exports.getSingle = getSingle;
+module.exports.saveAnalysis = saveAnalysis;

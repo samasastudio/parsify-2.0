@@ -22,7 +22,7 @@ function App() {
 
   const [searchState, setSearch] = useState({
     searchItems: [],
-    searching: false
+    searching: false,
   });
 
   const [chartState, setChart] = useState({
@@ -41,10 +41,13 @@ function App() {
   }, []);
 
   const onAnalyze = (cellParams) => {
-    console.log(cellParams.rowModel.id);
+    console.log('FOR ANALYZE', cellParams.rowModel);
     axios
-      .get(`/analyze/${cellParams.rowModel.id}`)
+      .get(
+        `/analyze/${cellParams.rowModel.id}/${cellParams.rowModel.data.track}/${cellParams.rowModel.data.artists}/${cellParams.rowModel.data.album}`
+      )
       .then((res) => {
+        console.log('RESPONSE FROM ANALYZE', res.data)
         const {
           danceability,
           energy,
@@ -69,7 +72,7 @@ function App() {
           chart: {
             width: "80%",
             type: "radialBar",
-            forColor: "#010101"
+            forColor: "#010101",
           },
           colors: [
             "rgba(217, 119, 191, 1)",
@@ -90,10 +93,10 @@ function App() {
           plotOptions: {
             radialBar: {
               track: {
-                show: false
-              }
-            }
-          }
+                show: false,
+              },
+            },
+          },
         };
 
         new ApexCharts(document.querySelector("#apexWrap"), options).render();
@@ -110,12 +113,12 @@ function App() {
   const handleSubmit = (e, textState) => {
     e.preventDefault();
     const { text } = textState;
-    setSearch({searching: true, searchItems: []})
+    setSearch({ searching: true, searchItems: [] });
     axios
       .get(`/search/${text}`)
       .then((res) => {
         console.log("RESPONSE FROM SUBMIT", res.data);
-        setSearch({searchItems: res.data});
+        setSearch({ searchItems: res.data });
       })
       .catch((err) => {
         console.error(err);
@@ -130,7 +133,14 @@ function App() {
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
           <div className="App-view">
-            {!searchState.searching ? <Search items={searchState.searchItems} onAnalyze={onAnalyze} onSearch={setSearch} forSubmit={handleSubmit}/> : null}
+            {!searchState.searching ? (
+              <Search
+                items={searchState.searchItems}
+                onAnalyze={onAnalyze}
+                onSearch={setSearch}
+                forSubmit={handleSubmit}
+              />
+            ) : null}
           </div>
         </Paper>
       </div>
