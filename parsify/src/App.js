@@ -75,7 +75,7 @@ function App() {
 
         var options = {
           chart: {
-            width: "80%",
+            width: "70%",
             type: "radialBar",
             forColor: "#010101",
           },
