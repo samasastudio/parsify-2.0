@@ -1,7 +1,13 @@
 import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import "./App.css";
-import { Paper, Button } from "@material-ui/core";
+import {
+  Paper,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@material-ui/core";
 import Search from "./components/Search";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
@@ -30,11 +36,12 @@ function App() {
     chartData: [],
     title: "",
   });
+  const [modalOpen, setModal] = useState(false);
 
   useEffect(() => {
     console.log("we're going to win");
     animateBackground();
-    getLoadItems()
+    getLoadItems();
   }, []);
 
   const getLoadItems = () => {
@@ -57,6 +64,7 @@ function App() {
           danceability,
           energy,
           instrumentalness,
+          speechiness,
           liveness,
           acousticness,
           valence,
@@ -68,6 +76,7 @@ function App() {
           danceability: parseInt(danceability * 100),
           energy: parseInt(energy * 100),
           instrumentalness: parseInt(instrumentalness * 100),
+          speechiness: parseInt(speechiness * 100),
           liveness: parseInt(liveness * 100),
           acousticness: parseInt(acousticness * 100),
           valence: parseInt(valence * 100),
@@ -85,12 +94,14 @@ function App() {
             "rgba(217, 141, 98, 1)",
             "rgba(217, 96, 85, 1)",
             "rgba(217, 74, 74, 1)",
+            "#58E899",
             "rgba(25, 141, 183, 1)",
           ],
           series: [
             parseInt(danceability * 100),
             parseInt(energy * 100),
             parseInt(instrumentalness * 100),
+            parseInt(speechiness * 100),
             parseInt(liveness * 100),
             parseInt(acousticness * 100),
             parseInt(valence * 100),
@@ -128,6 +139,10 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const handleModal = (bool) => {
+    setModal(bool);
   };
 
   if (chartState.hidden) {
@@ -173,23 +188,38 @@ function App() {
           <p
             className="stats"
             style={{ color: "rgba(217, 96, 85, 1)" }}
-          >{`Liveness: ${chartState.liveness}`}</p>
+          >{`Speechiness: ${chartState.speechiness}`}</p>
           <p
             className="stats"
             style={{ color: "rgba(217, 74, 74, 1)" }}
+          >{`Liveness: ${chartState.liveness}`}</p>
+          <p
+            className="stats"
+            style={{ color: "#58E899" }}
           >{`Acousticness: ${chartState.acousticness}`}</p>
           <p
             className="stats"
             style={{ color: "rgba(25, 141, 183, 1)" }}
           >{`Valence: ${chartState.valence}`}</p>
         </Paper>
-        <div
-          onClick={(e) => {
-            onReset(e);
-          }}
-          className="resetContainer"
-        >
+        <div className="resetContainer">
           <Button
+            onClick={() => {
+              handleModal(true);
+            }}
+            style={{
+              color: "rgba(217, 163, 98, 1)",
+              border: "1px #010101 solid",
+              backgroundColor: "rgba(1,1,1,.9)",
+              boxShadow: "2px 2px 8px rgba(1,1,1,.5)",
+            }}
+          >
+            Legend
+          </Button>
+          <Button
+            onClick={(e) => {
+              onReset(e);
+            }}
             style={{
               color: "rgba(217, 74, 74, 1)",
               border: "1px #010101 solid",
@@ -200,6 +230,57 @@ function App() {
             Reset
           </Button>
         </div>
+        <Dialog
+          onClose={() => {
+            handleModal(false);
+          }}
+          onClick={() => {
+            handleModal(false);
+          }}
+          aria-labelledby="simple-dialog-title"
+          open={modalOpen}
+          
+        >
+          <div style={{backgroundColor: "#010101", padding: "25px"}}>
+          <DialogTitle id="simple-dialog-title">
+            Feature Definitions
+          </DialogTitle>
+          <DialogContent>
+            Danceability describes how suitable a track is for dancing based on
+            a combination of musical elements including tempo, rhythm stability,
+            beat strength, and overall regularity.
+          </DialogContent>
+          <DialogContent>
+            Energy represents a perceptual measure of intensity and activity.
+            Typically, energetic tracks feel fast, loud, and noisy.
+          </DialogContent>
+          <DialogContent>
+            Instrumentalness predicts whether a track contains no vocals. “Ooh”
+            and “aah” sounds are treated as instrumental in this context. Rap or
+            spoken word tracks are clearly “vocal”.
+          </DialogContent>
+          <DialogContent>
+            Speechiness detects the presence of spoken words in a track. The
+            more exclusively speech-like the recording (e.g. talk show, audio
+            book, poetry), the closer to 100 the attribute value.
+          </DialogContent>
+          <DialogContent>
+            Liveness detects the presence of an audience in the recording.
+            Higher liveness values represent an increased probability that the
+            track was performed live.
+          </DialogContent>
+          <DialogContent>
+            Acousticness is A confidence measure of whether the track is
+            acoustic.
+          </DialogContent>
+          <DialogContent>
+            Valence is a measure describing the musical positiveness
+            conveyed by a track. Tracks with high valence sound more positive
+            (e.g. happy, cheerful, euphoric), while tracks with low valence
+            sound more negative (e.g. sad, depressed, angry).
+          </DialogContent>
+          </div>
+        </Dialog>
         <div className="chartWrap rotate" id="apexWrap" />
       </div>
     );
