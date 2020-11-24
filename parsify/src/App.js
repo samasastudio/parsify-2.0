@@ -7,11 +7,12 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  CircularProgress
 } from "@material-ui/core";
 import Search from "./components/Search";
 import axios from "axios";
-import { Doughnut } from "react-chartjs-2";
 import ApexCharts from "apexcharts";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 function App() {
   const animateBackground = () => {
@@ -47,7 +48,7 @@ function App() {
   const getLoadItems = () => {
     axios.get("/load").then((res) => {
       console.log("success loading", res.data);
-      setSearch({ searchItems: res.data });
+      setSearch({ searchItems: res.data, searching: false });
       setChart({ hidden: true, chartData: {}, title: "" });
     });
   };
@@ -129,6 +130,10 @@ function App() {
   const handleSubmit = (e, textState) => {
     e.preventDefault();
     const { text } = textState;
+    if (!text) {
+      setSearch({ searching: true, searchItems: [] });
+      return getLoadItems();
+    }
     setSearch({ searching: true, searchItems: [] });
     axios
       .get(`/search/${text}`)
@@ -149,7 +154,7 @@ function App() {
     return (
       <div className="App">
         <header>
-          <h1>parsify</h1>
+          <h1>IOX</h1>
         </header>
         <Paper elevation={24} style={{ background: "rgba(1, 1, 1, 0" }}>
           <div className="App-view">
@@ -159,8 +164,14 @@ function App() {
                 onAnalyze={onAnalyze}
                 onSearch={setSearch}
                 forSubmit={handleSubmit}
+                isSearching={searchState.searching}
               />
-            ) : null}
+            ) : (
+              <aside>
+                <p>loading...</p>
+                <CircularProgress />
+              </aside>
+            )}
           </div>
         </Paper>
       </div>
@@ -239,46 +250,45 @@ function App() {
           }}
           aria-labelledby="simple-dialog-title"
           open={modalOpen}
-          
         >
-          <div style={{backgroundColor: "#010101", padding: "25px"}}>
-          <DialogTitle id="simple-dialog-title">
-            Feature Definitions
-          </DialogTitle>
-          <DialogContent>
-            Danceability describes how suitable a track is for dancing based on
-            a combination of musical elements including tempo, rhythm stability,
-            beat strength, and overall regularity.
-          </DialogContent>
-          <DialogContent>
-            Energy represents a perceptual measure of intensity and activity.
-            Typically, energetic tracks feel fast, loud, and noisy.
-          </DialogContent>
-          <DialogContent>
-            Instrumentalness predicts whether a track contains no vocals. “Ooh”
-            and “aah” sounds are treated as instrumental in this context. Rap or
-            spoken word tracks are clearly “vocal”.
-          </DialogContent>
-          <DialogContent>
-            Speechiness detects the presence of spoken words in a track. The
-            more exclusively speech-like the recording (e.g. talk show, audio
-            book, poetry), the closer to 100 the attribute value.
-          </DialogContent>
-          <DialogContent>
-            Liveness detects the presence of an audience in the recording.
-            Higher liveness values represent an increased probability that the
-            track was performed live.
-          </DialogContent>
-          <DialogContent>
-            Acousticness is A confidence measure of whether the track is
-            acoustic.
-          </DialogContent>
-          <DialogContent>
-            Valence is a measure describing the musical positiveness
-            conveyed by a track. Tracks with high valence sound more positive
-            (e.g. happy, cheerful, euphoric), while tracks with low valence
-            sound more negative (e.g. sad, depressed, angry).
-          </DialogContent>
+          <div style={{ backgroundColor: "#010101", padding: "25px" }}>
+            <DialogTitle id="simple-dialog-title">
+              Feature Definitions
+            </DialogTitle>
+            <DialogContent>
+              Danceability describes how suitable a track is for dancing based
+              on a combination of musical elements including tempo, rhythm
+              stability, beat strength, and overall regularity.
+            </DialogContent>
+            <DialogContent>
+              Energy represents a perceptual measure of intensity and activity.
+              Typically, energetic tracks feel fast, loud, and noisy.
+            </DialogContent>
+            <DialogContent>
+              Instrumentalness predicts whether a track contains no vocals.
+              “Ooh” and “aah” sounds are treated as instrumental in this
+              context. Rap or spoken word tracks are clearly “vocal”.
+            </DialogContent>
+            <DialogContent>
+              Speechiness detects the presence of spoken words in a track. The
+              more exclusively speech-like the recording (e.g. talk show, audio
+              book, poetry), the closer to 100 the attribute value.
+            </DialogContent>
+            <DialogContent>
+              Liveness detects the presence of an audience in the recording.
+              Higher liveness values represent an increased probability that the
+              track was performed live.
+            </DialogContent>
+            <DialogContent>
+              Acousticness is A confidence measure of whether the track is
+              acoustic.
+            </DialogContent>
+            <DialogContent>
+              Valence is a measure describing the musical positiveness conveyed
+              by a track. Tracks with high valence sound more positive (e.g.
+              happy, cheerful, euphoric), while tracks with low valence sound
+              more negative (e.g. sad, depressed, angry).
+            </DialogContent>
           </div>
         </Dialog>
         <div className="chartWrap rotate" id="apexWrap" />

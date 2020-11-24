@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  TextField,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-} from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import "./Search.css";
 import axios from "axios";
@@ -24,7 +18,11 @@ const Search = ({ items, onAnalyze, onSearch, forSubmit }) => {
   ];
   return (
     <div style={{ padding: "50px", height: "100%" }}>
-      <form noValidate autoComplete="off" onSubmit={(e) => forSubmit(e, textState)}>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={(e) => forSubmit(e, textState)}
+      >
         <TextField
           label="Enter Song"
           variant="outlined"
@@ -36,26 +34,14 @@ const Search = ({ items, onAnalyze, onSearch, forSubmit }) => {
         className="dataWrapper"
         style={{ height: 400, width: "100%", marginTop: "2%" }}
       >
-        {items[0] === undefined ? (
-          <DataGrid
-            rows={items}
-            columns={columns}
-            pageSize={6}
-            onRowClick={(cellParams) => {
-              onAnalyze(cellParams);
-            }}
-            loading
-          />
-        ) : (
-          <DataGrid
-            rows={items}
-            columns={columns}
-            pageSize={6}
-            onRowClick={(cellParams) => {
-              onAnalyze(cellParams);
-            }}
-          />
-        )}
+        <DataGrid
+          rows={items}
+          columns={columns}
+          pageSize={6}
+          onRowClick={(cellParams) => {
+            onAnalyze(cellParams);
+          }}
+        />
       </div>
     </div>
   );

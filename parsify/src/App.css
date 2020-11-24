@@ -3,6 +3,11 @@
   src: local('Gulax'), url(./gulax-webfont.woff) format('woff');
 }
 
+@font-face {
+  font-family: 'Mess';
+  src: local('Mess'), url(./Mess-Light_web.woff) format('woff');
+}
+
 .pixelate {
   font-family: 'VT323';
 }
@@ -15,7 +20,7 @@
 
 h1 {
   text-shadow: 2px 2px 8px rgba(1,1,1,0.5);
-  font-family: 'Gulax';
+  font-family: 'Mess';
   font-size: 64px;
 }
 
