@@ -79,6 +79,14 @@ header {
   z-index: 99;
 }
 
+.songTitle {
+  position: absolute;
+  margin: auto;
+  z-index: 99;
+  font-size: 2vw;
+  width: 20%;
+}
+
 .chartWrap {
   width: 90%;
   height: 90%;
@@ -104,5 +112,11 @@ header {
   }
   to {
     transform: rotate(359deg);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.songTitle {
+    font-size: 3vw;
   }
 }

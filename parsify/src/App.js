@@ -7,7 +7,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import Search from "./components/Search";
 import axios from "axios";
@@ -182,10 +182,6 @@ function App() {
         <Paper elevation={10} className="titleContainer">
           <p
             className="stats"
-            style={{ color: "#ffffff" }}
-          >{`"${chartState.title}"`}</p>
-          <p
-            className="stats"
             style={{ color: "rgba(217, 119, 191, 1)" }}
           >{`Danceability: ${chartState.danceability}`}</p>
           <p
@@ -291,6 +287,12 @@ function App() {
             </DialogContent>
           </div>
         </Dialog>
+        <div class="songTitle">
+          <p
+            className="stats"
+            style={{ color: "#ffffff", width: "100%", textAlign: "center" }}
+          >{`"${chartState.title}"`}</p>
+        </div>
         <div className="chartWrap rotate" id="apexWrap" />
       </div>
     );
