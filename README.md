@@ -1,7 +1,7 @@
 # parsify-2.0
 Data visualization application for artists to see how Spotify analyzes their music
 
-![Alt Text](https://media.giphy.com/media/0tBUumQiX8A9UhSqol/giphy.gif)
+![Alt Text](https://media.giphy.com/media/ucIGMv4MhC1BJBMYVq/giphy.gif)
 
 ## Frameworks
 Parsify uses a MERN stack:
