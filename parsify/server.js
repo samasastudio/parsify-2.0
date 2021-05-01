@@ -73,7 +73,7 @@ app.get("/analyze/:UUID/:track/:artists/:album", checkMongoUUID, (req, res) => {
 })
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
+  app.use(express.static('./build'))
 }
 
 app.listen(process.env.PORT || 8080);
