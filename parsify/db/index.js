@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const mongoConfig = require("./mongoConfig");
 
 //connection:
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/parsify", {
+mongoose.connect(mongoConfig.uri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });

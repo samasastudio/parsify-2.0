@@ -24,3 +24,6 @@ yarn-error.log*
 
 config.js
 seed.json
+
+# mongo config
+db/mongoConfig.js
