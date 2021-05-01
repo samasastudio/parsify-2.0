@@ -32,7 +32,8 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "gen": "node generator.js",
     "seedJSON": "mongoimport --type json -d parsify -c features --drop --jsonArray seed.json"
   },
