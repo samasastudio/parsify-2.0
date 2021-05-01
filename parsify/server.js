@@ -79,4 +79,4 @@ app.get("/analyze/:UUID/:track/:artists/:album", checkMongoUUID, (req, res) => {
 //   })
 // }
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 8080);
