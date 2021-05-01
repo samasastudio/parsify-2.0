@@ -61,7 +61,20 @@ function App() {
       )
       .then((res) => {
         console.log("RESPONSE FROM ANALYZE", res.data);
-        const keys = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', "G#/Ab", 'A', 'A#/Bb', 'B']
+        const keys = [
+          "C",
+          "C#/Db",
+          "D",
+          "D#/Eb",
+          "E",
+          "F",
+          "F#/Gb",
+          "G",
+          "G#/Ab",
+          "A",
+          "A#/Bb",
+          "B",
+        ];
         const {
           danceability,
           energy,
@@ -72,10 +85,10 @@ function App() {
           valence,
           key,
           mode,
-          tempo
+          tempo,
         } = res.data[0];
 
-        console.log('KEY', key)
+        console.log("KEY", key);
 
         setChart({
           hidden: false,
@@ -87,8 +100,8 @@ function App() {
           liveness: parseInt(liveness * 100),
           acousticness: parseInt(acousticness * 100),
           valence: parseInt(valence * 100),
-          key: `${keys[key]} ${mode > 0 ? 'Major' : 'Minor'}`,
-          tempo: `${Math.floor(tempo)}`
+          key: `${keys[key]} ${mode > 0 ? "Major" : "Minor"}`,
+          tempo: `${Math.floor(tempo)}`,
         });
 
         var options = {
@@ -188,10 +201,10 @@ function App() {
     return (
       <div className="chartContainer">
         <Paper elevation={10} className="titleContainer">
-          <p className="stats" style={{color: "#fff"}}>
+          <p className="stats" style={{ color: "#fff" }}>
             {`Key: ${chartState.key}`}
           </p>
-          <p className="stats" style={{color: "#fff"}}>
+          <p className="stats" style={{ color: "#fff" }}>
             {`BPM: ${chartState.tempo}`}
           </p>
           <p

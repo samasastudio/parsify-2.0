@@ -26,11 +26,13 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "client": "react-scripts start",
     "build": "react-scripts build",
+    "install-client": "npm run install",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "nodemon server.js",
+    "start": "nodemon server.js",
     "gen": "node generator.js",
     "seedJSON": "mongoimport --type json -d parsify -c features --drop --jsonArray seed.json"
   },
