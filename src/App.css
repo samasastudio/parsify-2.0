@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'Gulax';
+  src: local('Gulax'), url(./gulax-webfont.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Mess';
+  src: local('Mess'), url(./Mess-Light_web.woff) format('woff');
+}
+
+.pixelate {
+  font-family: 'VT323';
+}
+
+.App {
+  text-align: left;
+  background-color: rgba(1, 1, 1, 0);
+  color: #010101;
+}
+
+h1 {
+  text-shadow: 2px 2px 8px rgba(1,1,1,0.5);
+  font-family: 'Mess';
+  font-size: 72px;
+}
+
+.App-view {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(1, 1, 1, 0.95);
+  padding: 0px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+header {
+  height: 10vh;
+  align-items: left;
+  padding-left: 50px;
+  padding-bottom: 25px;
+  background: rgba(217, 119, 191, 0);
+}
+
+.chartContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(1, 1, 1, 1);
+  overflow: hidden;
+}
+
+.titleContainer {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  margin: 25px;
+  padding: 25px;
+  z-index: 99;
+  font-size: 18px;
+  background-color: rgba(1, 1, 1, 0.9) !important;
+}
+
+.stats {
+  margin: 0;
+}
+
+.resetContainer {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  padding: 25px;
+  z-index: 99;
+}
+
+.songTitle {
+  position: absolute;
+  margin: auto;
+  z-index: 99;
+  font-size: 2vw;
+  width: 25%;
+}
+
+.chartWrap {
+  width: 90%;
+  height: 90%;
+  min-width: 600px;
+  min-height: 450px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  /* background: rgba(1, 1, 1, 0.05) */
+}
+
+.rotate {
+  animation: rotation 60s infinite linear;
+}
+
+.apexcharts-datalabels-group {
+  opacity: 0 !important;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.songTitle {
+    font-size: 4vw;
+  }
+
+  h1 {
+    font-size: 54px;
+  }
+}
