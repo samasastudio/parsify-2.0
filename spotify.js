@@ -13,13 +13,11 @@ const getPlaylist = (auth, uuid) => {
     }
   })
   .then((playlistData) => {
-    // console.log('playlist data from axios: ', playlistData.data.tracks.items);
     let name = playlistData.data.name;
     let plData = playlistData.data.tracks.items.map(x => {
       const artistList = x.track.artists.reduce((acc, el) => acc + el.name + ', ', '').slice(0, -2);
       return {track: x.track.name, id: x.track.id, album: x.track.album.name, artists: artistList}
     })
-    // console.log(pldata);
     return {plData, name, auth};
   })
   .catch(err => {console.log('playlist get failed: ', err)});

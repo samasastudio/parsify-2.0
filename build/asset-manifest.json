@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d6f2e075.chunk.css",
+    "main.js": "/static/js/main.352c2e82.chunk.js",
+    "main.js.map": "/static/js/main.352c2e82.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.3c0df63d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.3c0df63d.js.map",
+    "static/css/2.cd6b6eb0.chunk.css": "/static/css/2.cd6b6eb0.chunk.css",
+    "static/js/2.e685833c.chunk.js": "/static/js/2.e685833c.chunk.js",
+    "static/js/2.e685833c.chunk.js.map": "/static/js/2.e685833c.chunk.js.map",
+    "static/js/3.547c7fdb.chunk.js": "/static/js/3.547c7fdb.chunk.js",
+    "static/js/3.547c7fdb.chunk.js.map": "/static/js/3.547c7fdb.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.cd6b6eb0.chunk.css.map": "/static/css/2.cd6b6eb0.chunk.css.map",
+    "static/css/main.d6f2e075.chunk.css.map": "/static/css/main.d6f2e075.chunk.css.map",
+    "static/js/2.e685833c.chunk.js.LICENSE.txt": "/static/js/2.e685833c.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/gulax-webfont.b7b40067.woff",
+    "static/media/logo.103b5fa1.svg": "/static/media/logo.103b5fa1.svg",
+    "static/media/index.css": "/static/media/nunito-sans-latin-900italic.2e22e084.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3c0df63d.js",
+    "static/css/2.cd6b6eb0.chunk.css",
+    "static/js/2.e685833c.chunk.js",
+    "static/css/main.d6f2e075.chunk.css",
+    "static/js/main.352c2e82.chunk.js"
+  ]
+}
