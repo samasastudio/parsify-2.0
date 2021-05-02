@@ -40,27 +40,23 @@ function App() {
   const [modalOpen, setModal] = useState(false);
 
   useEffect(() => {
-    console.log("we're going to win");
     animateBackground();
     getLoadItems();
   }, []);
 
   const getLoadItems = () => {
     axios.get("/load").then((res) => {
-      console.log("success loading", res.data);
       setSearch({ searchItems: res.data, searching: false });
       setChart({ hidden: true, chartData: {}, title: "" });
     });
   };
 
   const onAnalyze = (cellParams) => {
-    console.log("FOR ANALYZE", cellParams.rowModel);
     axios
       .get(
-        `/analyze/${cellParams.rowModel.id}/${cellParams.rowModel.data.track}/${cellParams.rowModel.data.artists}/${cellParams.rowModel.data.album}`
+        `/analyze/${cellParams.row.id}/${cellParams.row.track}/${cellParams.row.artists}/${cellParams.row.album}`
       )
       .then((res) => {
-        console.log("RESPONSE FROM ANALYZE", res.data);
         const keys = [
           "C",
           "C#/Db",
@@ -87,8 +83,6 @@ function App() {
           mode,
           tempo,
         } = res.data[0];
-
-        console.log("KEY", key);
 
         setChart({
           hidden: false,
@@ -159,7 +153,6 @@ function App() {
     axios
       .get(`/search/${text}`)
       .then((res) => {
-        console.log("RESPONSE FROM SUBMIT", res.data);
         setSearch({ searchItems: res.data });
       })
       .catch((err) => {

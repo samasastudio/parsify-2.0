@@ -10,7 +10,6 @@ const checkMongoUUID = (req, res, next) => {
   getSingle(req.params.UUID).then(doc => {
     doc.length > 0 ? res.send(doc) : next()
   }).catch(err => {
-    console.log('error getting doc', err);
     res.sendStatus(500);
   })
 }
@@ -26,13 +25,11 @@ app.get("/load", function (req, res) {
 
 app.get("/search/:text", (req, res) => {
   const { text } = req.params;
-  console.log('getting text!', text);
   getAuth()
     .then(auth => {
       return getSearch(text, auth);
     })
     .then(results => {
-      console.log('results for search', results);
       const searchResults = results.map(x => {
         const artistList = x.artists.reduce((acc, el) => acc + el.name + ', ', '').slice(0, -2);
         return {id: x.id, track: x.name, artists: artistList, album: x.album.name }
@@ -50,14 +47,12 @@ app.get("/", function (req, res) {
 });
 
 app.get("/analyze/:UUID/:track/:artists/:album", checkMongoUUID, (req, res) => {
-  console.log('ANALYZE', req.params)
   const {UUID, track, artists, album } = req.params;
   getAuth()
     .then(auth => {
       return getAnalysis('single search', auth, [{id: UUID}]);
     })
     .then(results => {
-      console.log('results for analysis API', results);
       const {features} = results;
       features[0].track = track;
       features[0].artists = artists;
