@@ -45,7 +45,7 @@ function App() {
   }, []);
 
   const getLoadItems = () => {
-    axios.get("/load").then((res) => {
+    axios.get(`${window.location.href}load`).then((res) => {
       setSearch({ searchItems: res.data, searching: false });
       setChart({ hidden: true, chartData: {}, title: "" });
     });
@@ -54,7 +54,7 @@ function App() {
   const onAnalyze = (cellParams) => {
     axios
       .get(
-        `/analyze/${cellParams.row.id}/${cellParams.row.track}/${cellParams.row.artists}/${cellParams.row.album}`
+        `${window.location.href}analyze/${cellParams.row.id}/${cellParams.row.track}/${cellParams.row.artists}/${cellParams.row.album}`
       )
       .then((res) => {
         const keys = [
@@ -151,7 +151,7 @@ function App() {
     }
     setSearch({ searching: true, searchItems: [] });
     axios
-      .get(`/search/${text}`)
+      .get(`${window.location.href}search/${text}`)
       .then((res) => {
         setSearch({ searchItems: res.data });
       })
