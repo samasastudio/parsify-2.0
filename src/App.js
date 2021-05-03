@@ -45,10 +45,16 @@ function App() {
   }, []);
 
   const getLoadItems = () => {
-    axios.get(`${window.location.href}load`).then((res) => {
-      setSearch({ searchItems: res.data, searching: false });
-      setChart({ hidden: true, chartData: {}, title: "" });
-    });
+    axios
+      .get(`${window.location.href}load`)
+      .then((res) => {
+        console.log("LOAD SUCCESS", res.data);
+        setSearch({ searchItems: res.data, searching: false });
+        setChart({ hidden: true, chartData: {}, title: "" });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   };
 
   const onAnalyze = (cellParams) => {
