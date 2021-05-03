@@ -35,4 +35,4 @@ Create a mongoConfig.js file in the db directory with the following structure:
   uri: `YOUR_MONGODB_URI_GOES_HERE`
 }`
 
-For deployment and some of development, I've used and recommend capped collections on MongoDB Atlas that will save past search from users up to whatever cap size you'd like to allow.  A capped collection with preserve insertion order.
+For deployment and some of development, I've used and recommend capped collections (1MB) on MongoDB Atlas that will save past search from users up to whatever cap size you'd like to allow.  A capped collection will preserve insertion order.
