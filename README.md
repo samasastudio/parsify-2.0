@@ -1,5 +1,8 @@
 # parsify-2.0
-Data visualization application for artists to see how Spotify analyzes their music
+Data visualization application for artists to see how Spotify analyzes their music.
+
+Deployed example on heroku: https://parsifyapp.herokuapp.com/
+(allow 10s for server to boot up if asleep)
 
 ![Alt Text](https://media.giphy.com/media/ucIGMv4MhC1BJBMYVq/giphy.gif)
 
