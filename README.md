@@ -12,8 +12,8 @@ Parsify uses a MERN stack:
 
 ## Running App
 To start application after initial install:
-1. Run `yarn serve` to start proxy server
-2. Run `yarn start` to start client
+1. Run `yarn server` to start proxy server
+2. Run `yarn client` to start client
 
 ## Generator/Seed Script
 A generator script has been provided for you to populate mongo with a playlist's worth of song data.
@@ -23,5 +23,13 @@ A generator script has been provided for you to populate mongo with a playlist's
   ID: 'YOUR CLIENT ID',
   SECRET: 'YOUR SECRET KEY'
 }`
-3. Then you're all set!  Run `yarn gen` to generate your inital song data.
+3. Then you're all set!  Run `yarn gen` to generate your initial song data.
 4. Finally `yarn seed` to seed mongodb with your new data.
+
+## MongoDB setup
+Create a mongoConfig.js file in the db directory with the following structure:
+`module.exports = {
+  uri: `YOUR_MONGODB_URI_GOES_HERE`
+}`
+
+For deployment and some of development, I've used and recommend capped collections on MongoDB Atlas that will save past search from users up to whatever cap size you'd like to allow.  A capped collection with preserve insertion order.
